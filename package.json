@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/Seancahill25/Udemy_Course#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
     "express": "^4.16.2"
   },
   "devDependencies": {
