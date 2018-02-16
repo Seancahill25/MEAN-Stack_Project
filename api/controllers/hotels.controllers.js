@@ -43,6 +43,7 @@ module.exports.hotelsGetOne = function(req, res) {
 };
 
 module.exports.hotelsAddOne = function(req, res) {
+    var db = dbconn.get();
     var collection = db.collection("hotels");
     var newHotel;
     
