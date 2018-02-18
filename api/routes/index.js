@@ -8,19 +8,19 @@ router
     .route("/hotels")
     .get(ctrlHotels.hotelsGetAll);
     
-router
+    router
     .route("/hotels/:hotelId")
     .get(ctrlHotels.hotelsGetOne);
     
-router
+    router
     .route("/hotels/new")
     .post(ctrlHotels.hotelsAddOne);
     
-router
+    router
     .route("/hotels/:hotelId/reviews")
     .get(ctrlReviews.reviewsGetAll);
     
-router
+    router
     .route("/hotels/:hotelId/reviews/:reviewId")
     .get(ctrlReviews.reviewsGetOne);
     
