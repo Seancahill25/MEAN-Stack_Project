@@ -2,12 +2,18 @@
 angular.module("myApp").controller("MainController", MainController);
 
 
-  function MainController($http) {
+  function MainController(FilmFactory) {
     var vm = this;
     
-    $http.get("http://swapi-tpiros.rhcloud.com/files").then(function(res) {
-        vm.films = res.data;
-    });
+   FilmFactory.getAllFilms().then(function(res) {
+     vm.films = res;
+   });
     
     vm.name = "Sean";
+    
+    vm.date1 = '12 February 2016';
+    vm.date2 = '11 March 2016';
+    vm.date3 = '03 January 2015';
+    vm.date4 = '25 April 2014';
+    
 }
