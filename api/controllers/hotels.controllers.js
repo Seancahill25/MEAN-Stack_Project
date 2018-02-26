@@ -61,7 +61,7 @@ module.exports.hotelsGetAll = function(req, res) {
             res
             .status(400)
             .json({
-                "message" : "Conut limit of " + maxCount + " exceeded"
+                "message" : "Count limit of " + maxCount + " exceeded"
             });
             return;
         }
