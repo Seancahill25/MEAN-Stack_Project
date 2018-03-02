@@ -1,7 +1,7 @@
 /*global angular*/
 angular.module('meanhotel').controller('HotelController', HotelController);
 
-function HotelController($route, $routeParams, hotelDataFactory) {
+function HotelController($window, $routeParams, hotelDataFactory) {
     console.log("hotelController");
     var vm = this;
     var id = $routeParams.id;
@@ -26,8 +26,8 @@ function HotelController($route, $routeParams, hotelDataFactory) {
         };
         if (vm.reviewForm.$valid) {
             hotelDataFactory.postReview(id, postData).then(function(res) {
-                if(res.status === 200) {
-                    $route.reload();
+                if(res.status == 200) {
+                    $window.location.reload();
                 }
             }).catch(function(err) {
                 console.log(err);
