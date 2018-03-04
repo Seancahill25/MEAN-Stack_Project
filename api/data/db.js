@@ -35,5 +35,5 @@ process.once("SIGUSR2", function() {
 });
 
 require("./hotels.model");
-require("./users.mode.");
+require("./users.model");
 

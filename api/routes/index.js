@@ -3,7 +3,7 @@ var router = express.Router();
 
 var ctrlHotels = require("../controllers/hotels.controllers.js");
 var ctrlReviews = require("../controllers/reviews.controllers.js");
-var ctrlUsers = require("../contorllers/users.controllers.js");
+var ctrlUsers = require("../controllers/users.controllers.js");
 
 router
     .route("/hotels")
