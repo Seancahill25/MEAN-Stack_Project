@@ -85,7 +85,7 @@ var _addReview = function(req, res, hotel) {
             .json(err);
         } else {
             res
-            .status(201)
+            .status(200)
             .json(hotelUpdated.reviews[hotelUpdated.reviews.length -1]);
         }
     });

@@ -1,40 +1,48 @@
 /*global angular*/
 angular.module('meanhotel').controller('HotelController', HotelController);
 
-function HotelController($window, $routeParams, hotelDataFactory) {
-    console.log("hotelController");
-    var vm = this;
-    var id = $routeParams.id;
-    vm.isSubmitted = false;
-    hotelDataFactory.hotelDisplay(id).then(function(res) {
-        console.log(res);
-        vm.hotel = res.data;
-        vm.stars = _getStarRating(res.data.stars);
-    });
-    console.log("test")
-    
-    function _getStarRating(stars) {
-        console.log(stars);
-        return new Array(stars);
+function HotelController($route, $routeParams, $window, hotelDataFactory, AuthFactory, jwtHelper) {
+  var vm = this;
+  var id = $routeParams.id;
+  vm.isSubmitted = false;
+  hotelDataFactory.hotelDisplay(id).then(function(response) {
+    vm.hotel = response.data;
+    vm.stars = _getStarRating(response.data.stars);
+  });
+
+  function _getStarRating(stars) {
+    return new Array(stars);
+  }
+
+  vm.isLoggedIn = function() {
+    if (AuthFactory.isLoggedIn) {
+      return true;
+    } else {
+      return false;
     }
-    
-    vm.addReview = function() {
-        var postData = {
-            name: vm.name,
-            rating: vm.rating,
-            review: vm.review
-        };
-        if (vm.reviewForm.$valid) {
-            hotelDataFactory.postReview(id, postData).then(function(res) {
-                if(res.status == 200) {
-                    $window.location.reload();
-                }
-            }).catch(function(err) {
-                console.log(err);
-            });
-        } else {
-            vm.isSubmitted = true;
-        }
+  };
+
+  vm.addReview = function() {
+
+    var token = jwtHelper.decodeToken($window.sessionStorage.token);
+    var username = token.username;
+
+    var postData = {
+      name: username,
+      rating: vm.rating,
+      review: vm.review
     };
-    
+    if (vm.reviewForm.$valid) {
+      hotelDataFactory.postReview(id, postData).then(function(response) {
+        if (response.status === 200) {
+          $route.reload();
+        }
+      }).catch(function(error) {
+        console.log(error);
+      });
+    } else {
+      vm.isSubmitted = true;
+    }
+  };
+
 }
