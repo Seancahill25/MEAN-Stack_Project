@@ -1,6 +1,6 @@
 /*global angular */
 angular.module("meanhotel", ["ngRoute"])
-.config(config)
+.config(config);
 
 function config($httpProvider, $routeProvider) {
     $httpProvider.interceptors.push('AuthInterceptor');
