@@ -3,7 +3,11 @@ html {
     min-height: 100%;
 }
 body {
+    margin-top: 60px;
     margin-bottom: 90px;
+}
+.container {
+    padding: 0px 0 0 0;
 }
 .padded {
     padding-top: 30px

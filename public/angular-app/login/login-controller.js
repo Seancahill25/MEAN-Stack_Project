@@ -18,9 +18,9 @@ function LoginController($http, $location, $window, AuthFactory, jwtHelper) {
         password: vm.password
       };
 
-      $http.post('/api/users/login', user).then(function(response) {
-        if (response.data.success) {
-          $window.sessionStorage.token = response.data.token;
+      $http.post('/api/users/login', user).then(function(res) {
+        if (res.data.success) {
+          $window.sessionStorage.token = res.data.token;
           AuthFactory.isLoggedIn = true;
           var token = $window.sessionStorage.token;
           var decodedToken = jwtHelper.decodeToken(token);
@@ -28,19 +28,19 @@ function LoginController($http, $location, $window, AuthFactory, jwtHelper) {
         }
       }).catch(function(error) {
         console.log(error);
-      })
+      });
 
     }
-  }
+  };
 
   vm.logout = function() {
     AuthFactory.isLoggedIn = false;
     delete $window.sessionStorage.token;
     $location.path('/');
-  }
+  };
 
   vm.isActiveTab = function(url) {
     var currentPath = $location.path().split('/')[1];
-    return (url === currentPath ? 'active' : '');
-  }
+    return (url === currentPath ? 'nav-item active' : '');
+  };
 }

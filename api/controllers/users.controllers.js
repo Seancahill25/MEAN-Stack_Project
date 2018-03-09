@@ -39,7 +39,7 @@ module.exports.login = function(req, res) {
         }  else {
             if (bcrypt.compareSync(password, user.password)) {
                 console.log("User found", user);
-                var token = jwt.sign({ username: user.username }, "secret", { expiresIn: 3600});
+                var token = jwt.sign({ username: user.username }, "s3cr3t", { expiresIn: 3600});
                 res.status(200).json({success: true, token: token});
             } else {
                 res.status(401).json("Unauthorized");
@@ -53,7 +53,7 @@ module.exports.authenticate = function(req, res, next) {
     var headerExists = req.headers.authorization;
     if (headerExists) {
         var token = req.headers.authorization.split(' ')[1];
-        jwt.verify(token, 'secret', function(err, decoded) {
+        jwt.verify(token, 's3cr3t', function(err, decoded) {
             if (err) {
                 console.log(err);
                 res.status(401).json("Unauthorized");
@@ -63,7 +63,7 @@ module.exports.authenticate = function(req, res, next) {
             }
         });
     } else {
-        res.status(401).json("no token provided");
+        res.status(403).json("no token provided");
     }
 };
 
